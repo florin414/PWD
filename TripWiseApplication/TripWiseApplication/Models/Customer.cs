@@ -11,6 +11,7 @@ public class Customer
     [Required]
     [StringLength(50)]
     public string Name { get; set; }
+    public bool IsUserAuthenticated { get; set; } = false;
     [Required]
     public string Password { get; set; }
     [Required]

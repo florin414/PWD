@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Accomodations";
+}
+
+<h1>Accomodations</h1>
+
+<table align="center" class="table table-bordered" style="border-radius: 15px;">
+
+    <tr>
+        <th>Destination</th>
+        <th>Description</th>
+        <th>Price</th>
+    </tr>
+    <tr>
+        <td>Villa Jibacoa <br><img style="height:150px; width:170px; float:left;" src="https://images.pexels.com/photos/1450363/pexels-photo-1450363.jpeg?auto=compress&cs=tinysrgb&w=600 alt="Image" /></td>
+        <td>
+            <ul>
+
+                <li>255 rooms</li>
+                <li>One 9-storey building</li>
+                <li>4 restaurants</li>
+                <li>5 bars</li>
+                <li>Pool</li>
+                <li>110 and 220 volts (adaptor required)</li>
+            </ul>
+
+        </td>
+        <td>$784 <div style="position: relative; margin-top: 40px;">
+            <form method="post">
+                <button asp-page-handler="Edit" class="py-3 px-5 me-2 border  btn btn-primary ">Book Now!</button>
+            </form>
+        </div></td>
+    </tr>
+
+</table>

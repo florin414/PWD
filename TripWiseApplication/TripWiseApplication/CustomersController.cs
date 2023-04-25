@@ -7,12 +7,24 @@ namespace TripWiseApplication
 {
     public class CustomersController : Controller
     {
-        private readonly TripWiseApplicationContext _context;
+        private readonly TripWiseApplicationContext _context; // sters
+
+        string email;
+        string password;
+
 
         public CustomersController(TripWiseApplicationContext context)
         {
             _context = context;
         }
+
+        [HttpPost]
+        public IActionResult Login(string email, string password)
+        {
+           return View();
+
+        }
+
 
         // GET: Customers
         public async Task<IActionResult> Index()

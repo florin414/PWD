@@ -3,6 +3,8 @@ using TripWiseApplication.DataAccess.Context;
 using TripWiseApplication.DataAccess.Repositories.Interfaces;
 using TripWiseApplication.DataAccess.Repositories;
 using TripWiseApplication.Models;
+using TripWiseApplication.BusinessLogic.IServices;
+using TripWiseApplication.BusinessLogic.Services;
 
 try
 {
@@ -28,6 +30,18 @@ try
     builder.Services.AddScoped<IBaseRepository<Review, int>, BaseRepository<Review, int>>();
     builder.Services.AddScoped<IBaseRepository<Room, int>, BaseRepository<Room, int>>();
     builder.Services.AddScoped<IBaseRepository<Ticket, int>, BaseRepository<Ticket, int>>();
+
+    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+    // Add services entity
+    builder.Services.AddScoped<ICustomerService, CustomerService>();
+    builder.Services.AddScoped<IAccommodationService, AccommodationService>();
+    builder.Services.AddScoped<IBookingService, BookingService>();
+    builder.Services.AddScoped<IReviewService, ReviewService>();
+    builder.Services.AddScoped<IRoomService, RoomService>();
+    builder.Services.AddScoped<ITicketService, TicketService>();
+
+
 
     var app = builder.Build();
 

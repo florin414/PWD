@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripWiseApplication.DataAccess.Context;
 
@@ -11,9 +12,10 @@ using TripWiseApplication.DataAccess.Context;
 namespace TripWiseApplication.Migrations
 {
     [DbContext(typeof(TripWiseApplicationContext))]
-    partial class TripWiseApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230420162532_updateCustomerWithIsUserAuthenticatedProperty")]
+    partial class updateCustomerWithIsUserAuthenticatedProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
