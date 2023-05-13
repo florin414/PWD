@@ -5,14 +5,27 @@ using TripWiseApplication.DataAccess.Repositories;
 using TripWiseApplication.Models;
 using TripWiseApplication.BusinessLogic.IServices;
 using TripWiseApplication.BusinessLogic.Services;
+using Microsoft.AspNetCore.Identity;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
-    builder.Services.AddControllersWithViews();
 
+    builder.Services.AddRazorPages();
+    builder.Services.AddNotyf(config =>
+    {
+        config.DurationInSeconds = 5;
+        config.IsDismissable = true;
+        config.Position = NotyfPosition.TopRight;
+    });
+
+    builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<TripWiseApplicationContext>();
 
     var connectionString =
     builder.Configuration.GetConnectionString("TripWiseDBConnection")
@@ -24,6 +37,25 @@ try
         options => options.UseSqlServer(connectionString)
     );
 
+    builder.Services.Configure<IdentityOptions>(options =>
+    {
+        // Password settings
+        options.Password.RequireDigit = true;
+        options.Password.RequiredLength = 8;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = true;
+        options.Password.RequireLowercase = false;
+        options.Password.RequiredUniqueChars = 6;
+
+        // Lockout settings
+        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+        options.Lockout.MaxFailedAccessAttempts = 10;
+        options.Lockout.AllowedForNewUsers = true;
+
+        // User Settings
+        options.User.RequireUniqueEmail = true;
+    });
+
     builder.Services.AddScoped<IBaseRepository<Accommodation, int>, BaseRepository<Accommodation, int>>();
     builder.Services.AddScoped<IBaseRepository<Booking, int>, BaseRepository<Booking, int>>();
     builder.Services.AddScoped<IBaseRepository<Customer, int>, BaseRepository<Customer, int>>();
@@ -34,13 +66,12 @@ try
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
     // Add services entity
-    builder.Services.AddScoped<ICustomerService, CustomerService>();
+    //builder.Services.AddScoped<ICustomerService, CustomerService>();
     builder.Services.AddScoped<IAccommodationService, AccommodationService>();
     builder.Services.AddScoped<IBookingService, BookingService>();
     builder.Services.AddScoped<IReviewService, ReviewService>();
     builder.Services.AddScoped<IRoomService, RoomService>();
     builder.Services.AddScoped<ITicketService, TicketService>();
-
 
 
     var app = builder.Build();
@@ -58,12 +89,16 @@ try
 
     app.UseRouting();
 
+    app.UseAuthentication();
     app.UseAuthorization();
 
     app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 
+    app.MapRazorPages();
+    app.UseCookiePolicy();
+    app.UseNotyf();
     app.Run();
 }
 catch (Exception e)

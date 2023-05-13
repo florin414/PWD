@@ -21,7 +21,7 @@ public class RoomController : Controller
     }
 
     [HttpPost]
-    public IActionResult OnPostRoomAsync()
+    public IActionResult Create()
     {
         _roomService.AddRoom(Room);
         return View();

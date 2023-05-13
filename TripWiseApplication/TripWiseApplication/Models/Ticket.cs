@@ -10,9 +10,11 @@ public class Ticket
     public int TicketId { get; set; }
     [Required]
     public double Price { get; set; }
+
     [ForeignKey("CustomerId")]
     public int CustomerId { get; set; }
     public Customer? Customer { get; set; }
+
     [ForeignKey("BookingId")]
     public int? BookingId { get; set; }
     public Booking? Booking { get; set; }

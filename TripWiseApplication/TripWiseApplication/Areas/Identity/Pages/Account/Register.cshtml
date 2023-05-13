@@ -1,0 +1,198 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Create a new account.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.Email"></label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.Password"></label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.ConfirmPassword"></label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to register.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    /* Centrare elemente */
+.row {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.col-md-4 {
+margin: 20px;
+}
+
+/* Stilizare formular */
+form {
+background-color: #fff;
+padding: 20px;
+border-radius: 5px;
+box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+margin-top: 0;
+}
+
+form .form-floating {
+position: relative;
+margin-bottom: 10px;
+}
+
+form input[type="email"],
+form input[type="password"] {
+width: 100%;
+height: 50px;
+padding: 10px;
+border: none;
+border-bottom: 2px solid #c8ccd4;
+background-color: transparent;
+}
+
+form input[type="email"]:focus,
+form input[type="password"]:focus {
+outline: none;
+border-bottom: 2px solid #0d6efd;
+}
+
+form input[type="email"]::placeholder,
+form input[type="password"]::placeholder {
+color: #6c757d;
+}
+
+form label {
+position: absolute;
+top: 10px;
+left: 10px;
+color: #6c757d;
+font-size: 16px;
+font-weight: 400;
+transition: all 0.3s ease-out;
+pointer-events: none;
+}
+
+form input[type="email"]:focus + label,
+form input[type="password"]:focus + label,
+form input[type="email"]:not(:placeholder-shown) + label,
+form input[type="password"]:not(:placeholder-shown) + label {
+top: -15px;
+left: 0;
+font-size: 14px;
+color: #0d6efd;
+font-weight: 500;
+}
+
+form button[type="submit"] {
+background-color: #0d6efd;
+border: none;
+border-radius: 5px;
+color: #fff;
+padding: 10px;
+font-size: 16px;
+font-weight: 500;
+transition: all 0.3s ease-out;
+cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+background-color: #0c5cde;
+}
+
+/* Stilizare mesaje de eroare */
+.text-danger {
+color: #dc3545;
+font-size: 14px;
+font-weight: 500;
+margin-top: 5px;
+}
+
+/* Stilizare secțiunea cu autentificare externă */
+.col-md-6 {
+margin: 20px;
+}
+
+section {
+background-color: #fff;
+padding: 20px;
+border-radius: 5px;
+box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+h3 {
+margin-top: 0;
+font-size: 20px;
+font-weight: 500;
+}
+
+form .btn-primary {
+background-color: #0d6efd;
+border: none;
+border-radius: 5px;
+color: #fff;
+padding: 10px;
+font-size: 16px;
+font-weight: 500;
+transition: all 0.3s ease-out;
+cursor: pointer;
+}
+
+form .btn-primary:hover {
+background-color: #0c5cde;
+}
+</style>

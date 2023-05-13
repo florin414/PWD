@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using TripWiseApplication.BusinessLogic.IServices;
 using TripWiseApplication.Models;
 
 namespace TripWiseApplication.Controllers;
+
+[Authorize(Roles = "Administrator,User")]
 public class AccomodationController : Controller
 {
     private readonly IAccommodationService _accommodationService;
@@ -14,6 +19,8 @@ public class AccomodationController : Controller
         _accommodationService = accommodationService ?? throw new ArgumentNullException(nameof(accommodationService));
     }
 
+    [Authorize(Roles = "User")]
+    [Authorize(Roles = "Administrator")]
     [HttpGet]
     public IActionResult Index()
     {

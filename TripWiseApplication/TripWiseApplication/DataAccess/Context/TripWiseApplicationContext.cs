@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TripWiseApplication.Models;
 
 namespace TripWiseApplication.DataAccess.Context;
 
-public class TripWiseApplicationContext : DbContext
+public class TripWiseApplicationContext : IdentityDbContext<IdentityUser>
 {
     public DbSet<Customer>? Customers { get; set; }
     public DbSet<Booking>? Bookings { get; set; }
