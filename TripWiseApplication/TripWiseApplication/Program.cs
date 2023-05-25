@@ -62,7 +62,7 @@ try
     builder.Services.AddScoped<IBaseRepository<Review, int>, BaseRepository<Review, int>>();
     builder.Services.AddScoped<IBaseRepository<Room, int>, BaseRepository<Room, int>>();
     builder.Services.AddScoped<IBaseRepository<Ticket, int>, BaseRepository<Ticket, int>>();
-
+    builder.Services.AddScoped<IBaseRepository<Image, int>, BaseRepository<Image, int>>();
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
     // Add services entity
@@ -72,7 +72,7 @@ try
     builder.Services.AddScoped<IReviewService, ReviewService>();
     builder.Services.AddScoped<IRoomService, RoomService>();
     builder.Services.AddScoped<ITicketService, TicketService>();
-
+    builder.Services.AddScoped<IImageService, ImageService>();
 
     var app = builder.Build();
 

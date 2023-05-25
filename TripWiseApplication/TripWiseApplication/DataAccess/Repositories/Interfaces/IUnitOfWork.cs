@@ -11,5 +11,7 @@ public interface IUnitOfWork : IDisposable
     IBaseRepository<Room, int> RoomRepository { get; set; }
     IBaseRepository<Ticket, int> TicketRepository { get; set; }
 
+    IBaseRepository<Image, int> ImageRepository { get; set; }
+
     void Save();
 }

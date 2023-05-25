@@ -15,6 +15,7 @@ internal class UnitOfWork : IUnitOfWork
     public IBaseRepository<Review, int> ReviewRepository { get; set; }
     public IBaseRepository<Room, int> RoomRepository { get; set; }
     public IBaseRepository<Ticket, int> TicketRepository { get; set; }
+    public IBaseRepository<Image, int> ImageRepository { get; set; }
 
     public UnitOfWork(
         TripWiseApplicationContext dbContext,
@@ -23,7 +24,8 @@ internal class UnitOfWork : IUnitOfWork
         IBaseRepository<Booking, int> bookingRepository,
         IBaseRepository<Review, int> reviewRepository,
         IBaseRepository<Room, int> roomRepository,
-        IBaseRepository<Ticket, int> ticketRepository
+        IBaseRepository<Ticket, int> ticketRepository,
+        IBaseRepository<Image, int> imageRepository
     )
     {
         _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
@@ -39,6 +41,8 @@ internal class UnitOfWork : IUnitOfWork
         RoomRepository = roomRepository ?? throw new ArgumentNullException(nameof(roomRepository));
         TicketRepository =
             ticketRepository ?? throw new ArgumentNullException(nameof(ticketRepository));
+        ImageRepository =
+            imageRepository ?? throw new ArgumentNullException(nameof(imageRepository));
     }
 
     public void Save()

@@ -1,0 +1,41 @@
+﻿@model (IEnumerable<Accommodation>,Image[] )
+@{
+    ViewData["Title"] = "Accomodation";
+    var (accomodations, images) = Model;
+}
+
+<h1>Accomodations</h1>
+
+<table align="center" class="table table-bordered" style="border-radius: 15px;">
+    @foreach (var accomodation in accomodations)
+    {
+       <tr>
+           <th>Destination</th>
+            <th>Address</th>
+            <th>Check-in Date</th>
+            <th>Check-out Date</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td><img style="height:150px; width:170px; float:left;" src=@images[accomodation.AccommodationId-1].Data alt="Image" /></td>
+            <td>
+                <ul>
+                    <li>@accomodation.Address</li>
+                </ul>
+            </td>
+            <td>
+                <input type="date" id="check-in-date" name="check-in-date">
+            </td>
+            <td>
+                <input type="date" id="check-out-date" name="check-out-date">
+            </td>
+            <td><div style="position: relative; margin-top: 40px;">
+                <form method="post">
+                    <a asp-controller="Booking" asp-action="Index" asp-route-id="@accomodation.AccommodationId" class="py-3 px-5 me-2 border  btn btn-primary ">Booking!</a>
+                     <a asp-controller="Review" asp-action="Index" asp-route-id="@accomodation.AccommodationId" class="py-3 px-5 me-2 border  btn btn-primary ">See reviews!</a>
+                </form>
+                   
+            </div></td>
+        </tr>
+    }
+</table>

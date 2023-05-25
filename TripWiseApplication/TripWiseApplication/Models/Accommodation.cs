@@ -10,10 +10,8 @@ public class Accommodation
     public int AccommodationId { get; set; }
     [Required]
     public string Address { get; set; }
-    [Required]
-    public double Price { get; set; }
-    [Required]
-    public int DurationOfStay { get; set; }
+    public double? Price { get; set; }
+    public int? DurationOfStay { get; set; }
     [ForeignKey("RoomId")]
     public int? RoomId { get; set; }
     public Room? Room { get; set; }

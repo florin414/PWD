@@ -1,0 +1,22 @@
+﻿@model (Accommodation, Image)
+@{
+    ViewData["Title"] = "Booking";
+    var (accommodation, image) = Model;
+}
+
+<table align="center" class="table table-bordered" style="border-radius: 15px;">
+    <tr>
+        <th>Booking</th>
+    </tr>
+    <tr>
+        <td><img style="height:150px; width:170px; float:left;" src=@image.Data alt="Image" /><h3>Adress: @accommodation.Address</h3></br></td>
+        <td>
+            <ul>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<form method="post">
+    <a asp-controller="Accommodation" asp-action="Index" class="py-3 px-5 me-2 border  btn btn-primary ">Return Accommodations!</a>
+</form>

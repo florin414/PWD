@@ -24,4 +24,9 @@ public class ReviewService : IReviewService
         await _unitOfWork.ReviewRepository.RemoveAsync(id);
         _unitOfWork.Save();
     }
+
+    public IEnumerable<Review> GetAllReviewByRoomId(int id) 
+    {
+        return _unitOfWork.ReviewRepository.GetByFilter(r => r.RoomId == id);
+    }
 }

@@ -25,4 +25,10 @@ public class AccommodationService : IAccommodationService
        await _unitOfWork.AccommodationRepository.RemoveAsync(id);
        _unitOfWork.Save();
     }
+
+
+    public IEnumerable<Accommodation> GetAll()
+    {
+        return _unitOfWork.AccommodationRepository.GetAll();
+    }
 }
